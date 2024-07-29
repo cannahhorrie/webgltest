@@ -102,17 +102,20 @@
   var unityInstance;
 
   // Function to send a message to Unity
-  function sendTextToUnity(text) {
+  function sendTextToUnity() {
     if (unityInstance) {
-      unityInstance.SendMessage('TextObject', 'SetText', text);
+      unityInstance.SendMessage('TextObject', 'SetText', 'javatest');
     } else {
       console.error('Unity instance is not available.');
     }
   }
 
-  function setCameraPosition(x) {
+  var xpos = 0;
+
+  function setCameraPosition() {
     if (unityInstance) {
-      unityInstance.SendMessage('Main Camera', 'SetCameraXPosition', x);
+      xpos += 1; // Increment the x position by 1
+      unityInstance.SendMessage('Main Camera', 'SetCameraXPosition', xpos.toString()); // Send the updated position to Unity
     } else {
       console.error('Unity instance is not available.');
     }
@@ -131,8 +134,8 @@
       };
 
       // Call the function to update text after Unity has loaded
-      sendTextToUnity('javascript text test now');
-      setCameraPosition('2')
+     // sendTextToUnity('javascript text test');
+      //setCameraPosition('2')
     }).catch((message) => {
       alert(message);
     });
@@ -141,4 +144,7 @@
 
 </script>
 </body>
+<button onclick='sendTextToUnity()'>text</button>
+<button onclick='setCameraPosition()'>Move Camera</button>
+
 </html>
